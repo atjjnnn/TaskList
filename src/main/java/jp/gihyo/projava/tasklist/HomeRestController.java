@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 public class HomeRestController {
@@ -33,5 +34,12 @@ public class HomeRestController {
         taskItems.add(item);
 
         return "タスクを追加しました。";
+    }
+
+    @GetMapping("/restlist")
+    String listItems() {
+        return taskItems.stream()
+                .map(TaskItem::toString)
+                .collect(Collectors.joining(", "));
     }
 }
