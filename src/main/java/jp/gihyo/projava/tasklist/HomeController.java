@@ -1,5 +1,6 @@
 package jp.gihyo.projava.tasklist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,12 @@ public class HomeController {
 
     record TaskItem(String id, String task, String deadline, boolean done) {}
     private List<TaskItem> taskItems = new ArrayList<>();
+    private final TaskListDao dao;
+
+    @Autowired
+    HomeController(TaskListDao dao) {
+        this.dao = dao;
+    }
 
     @RequestMapping(value="/hello")
     String hello(Model model) {
@@ -25,6 +32,7 @@ public class HomeController {
 
     @GetMapping("/list")
     String listItems(Model model) {
+        List<TaskItem> taskItems = dao.findAll();
         model.addAttribute("taskList", taskItems);
         return "home";
     }
@@ -34,8 +42,7 @@ public class HomeController {
                    @RequestParam("deadline") String deadline) {
         String id = UUID.randomUUID().toString().substring(0, 8);
         TaskItem item = new TaskItem(id, task, deadline, false);
-        taskItems.add(item);
-
+        dao.add(item);
         return "redirect:/list";
     }
 }
