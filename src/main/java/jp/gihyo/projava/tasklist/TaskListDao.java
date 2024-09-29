@@ -44,10 +44,14 @@ public class TaskListDao {
 
     public int update(TaskItem taskItem) {
         return jdbcTemplate.update(
-                "UPDATE tasklist SET task = ?, deadline = ?, done = ?, WHERE id = ?",
+                "UPDATE TASKLIST SET task = ?, deadline = ?, done = ? WHERE id = ?",
                         taskItem.task(),
                         taskItem.deadline(),
                         taskItem.done(),
                         taskItem.id());
+    }
+
+    public int delete(String id) {
+        return jdbcTemplate.update("DELETE FROM TASKLIST WHERE id = ?", id);
     }
 }
