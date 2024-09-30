@@ -1,4 +1,4 @@
-package jp.gihyo.projava.tasklist;
+package jp.gihyo.projava.tasklist.dao;
 
 import jp.gihyo.projava.tasklist.HomeController.TaskItem;
 

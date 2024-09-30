@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class HomeRestController {
 
     record TaskItem(String id, String task, String deadline, boolean done) {}
-    private List<TaskItem> taskItems = new ArrayList<>();
+    private final List<TaskItem> taskItems = new ArrayList<>();
 
     @RequestMapping("/resthello")
     String hello() {
