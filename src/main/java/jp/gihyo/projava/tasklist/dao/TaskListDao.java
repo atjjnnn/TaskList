@@ -1,6 +1,6 @@
 package jp.gihyo.projava.tasklist.dao;
 
-import jp.gihyo.projava.tasklist.HomeController.TaskItem;
+import jp.gihyo.projava.tasklist.controller.HomeController.TaskItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

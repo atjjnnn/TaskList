@@ -1,4 +1,4 @@
-package jp.gihyo.projava.tasklist;
+package jp.gihyo.projava.tasklist.controller;
 
 import jp.gihyo.projava.tasklist.dao.TaskListDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Controller
 public class HomeController {
 
-    record TaskItem(String id, String task, String deadline, boolean done) {}
+    public record TaskItem(String id, String task, String deadline, boolean done) {}
     private final List<TaskItem> taskItems = new ArrayList<>();
     private final TaskListDao dao;
 
@@ -42,6 +42,7 @@ public class HomeController {
     String addItem(@RequestParam("task") String task,
                    @RequestParam("deadline") String deadline) {
         String id = UUID.randomUUID().toString().substring(0, 8);
+
         TaskItem item = new TaskItem(id, task, deadline, false);
         dao.add(item);
         return "redirect:/list";
